@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({
                 message: "Wrong URL format"
             }, {
-                status: 411
+                status: 412
             })    
         }
 
