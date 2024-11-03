@@ -8,7 +8,8 @@ import { getServerSession } from "next-auth";
 
 const CreateStreamSchema = z.object({
     creatorId: z.string(),
-    url: z.string()
+    url: z.string(),
+    bogus: z.string()
 });
 
 const MAX_QUEUE_LEN = 20;
