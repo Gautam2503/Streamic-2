@@ -111,64 +111,33 @@ export default function StreamView({
 
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Prepare the body
-    const body = JSON.stringify({
-        creatorId,
-        url: inputLink,
-        bogus: bog
-    });
-
-    try {
-        const res = await fetch("/api/streams", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Content-Length": Buffer.byteLength(body, 'utf-8').toString(),
-                 // Adding Content-Lengtha
-            },
-            body,
-        });
-        console.log(Buffer.byteLength(body, 'utf-8').toString());
-        if (!res.ok) {
-            throw new Error(`Server error: ${res.status} ${res.statusText}`);
-        }
-
-        const newStream = await res.json();
-        console.log(newStream);
-        setQueue([...queue, newStream]);
-    } catch (error) {
-        console.error("Error adding video:", error);
-    } finally {
-        setLoading(false);
-        setInputLink('');
-    }
-};
-
-
-
-  // Handle video submission
 //   const handleSubmit = async (e: React.FormEvent) => {
 //     e.preventDefault();
 //     setLoading(true);
 
 //     // Prepare the body
-//     const body = {
+//     const body = JSON.stringify({
 //         creatorId,
 //         url: inputLink,
-//     };
+//         bogus: bog
+//     });
 
 //     try {
-//         const res = await axios.post("/api/streams", body, {
+//         const res = await fetch("/api/streams", {
+//             method: "POST",
 //             headers: {
 //                 "Content-Type": "application/json",
+//                 "Content-Length": Buffer.byteLength(body, 'utf-8').toString(),
+//                  // Adding Content-Lengtha
 //             },
+//             body,
 //         });
+//         console.log(Buffer.byteLength(body, 'utf-8').toString());
+//         if (!res.ok) {
+//             throw new Error(`Server error: ${res.status} ${res.statusText}`);
+//         }
 
-//         const newStream = res.data;
+//         const newStream = await res.json();
 //         console.log(newStream);
 //         setQueue([...queue, newStream]);
 //     } catch (error) {
@@ -178,6 +147,41 @@ export default function StreamView({
 //         setInputLink('');
 //     }
 // };
+
+
+//axios
+
+
+const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const body = {
+        creatorId,
+        url: inputLink,
+        bogus: bog
+    };
+
+    try {
+        const res = await axios.post("/api/streams", body, {
+            headers: { "Content-Type": "application/json" }
+        });
+
+        console.log(res.data);
+        setQueue([...queue, res.data]);
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("Error adding video:", error.message);
+            console.error("Response data:", error.response?.data);
+            console.error("Status:", error.response?.status);
+        } else {
+            console.error("Unexpected error:", error);
+        }
+    } finally {
+        setLoading(false);
+        setInputLink('');
+    }
+};
 
   // Handle upvote/downvote
   const handleVote = (id: string, isUpvote: boolean) => {
