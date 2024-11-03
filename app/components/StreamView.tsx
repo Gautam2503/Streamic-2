@@ -112,10 +112,13 @@ export default function StreamView({
     try {
       const res = await fetch("/api/streams/", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           creatorId,
-          url: inputLink
-        })
+          url: inputLink,
+        }),
       });
       const newStream = await res.json();
       setQueue([...queue, newStream]);
