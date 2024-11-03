@@ -120,7 +120,7 @@ export default function StreamView({
 
     try {
         console.log(Buffer.byteLength(body, 'utf-8').toString());
-        const res = await fetch("/api/streams/", {
+        const res = await fetch("/api/streams/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
