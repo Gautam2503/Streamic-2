@@ -119,12 +119,13 @@ export default function StreamView({
     });
 
     try {
-
+        console.log(Buffer.byteLength(body, 'utf-8').toString());
         const res = await fetch("/api/streams/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                 // Adding Content-Length
+                "Content-Length": Buffer.byteLength(body, 'utf-8').toString(),
+                 // Adding Content-Lengtha
             },
             body,
         });
@@ -132,6 +133,7 @@ export default function StreamView({
         if (!res.ok) {
             throw new Error(`Server error: ${res.status} ${res.statusText}`);
         }
+
         const newStream = await res.json();
         console.log(newStream);
         setQueue([...queue, newStream]);
