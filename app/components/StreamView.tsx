@@ -117,17 +117,7 @@ export default function StreamView({
     });
 
     try {
-      const testFetch = async () => {
-        const res = await fetch("https://streamic.vercel.app/api/streams/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ creatorId: "test", url: "test" }),
-        });
-        console.log(res);
-    };
-    
-    testFetch();
-        const res = await fetch("https://streamic.vercel.app/api/streams/", {
+        const res = await fetch("/api/streams/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
