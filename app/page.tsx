@@ -22,10 +22,6 @@ export default function LandingPage() {
                 Empower your audience to curate your music stream. Connect with fans like never before.
               </p>
             </div>
-            <div className="space-x-4">
-              <Button className="bg-purple-600 text-white hover:bg-purple-700">Get Started</Button>
-              <Button variant="outline" className="text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-gray-900">Learn More</Button>
-            </div>
           </div>
         </div>
       </main>
@@ -59,16 +55,6 @@ export default function LandingPage() {
               <p className="mx-auto max-w-[600px] text-gray-400 md:text-xl">
                 Join MusicStreamChoice today and create unforgettable experiences.
               </p>
-            </div>
-            <div className="w-full max-w-sm space-y-2">
-              <form className="flex space-x-2">
-                <Input 
-                  className="max-w-lg flex-1 bg-gray-800 border-gray-700 text-white placeholder-gray-500" 
-                  placeholder="Enter your email" 
-                  type="email" 
-                />
-                <Button type="submit" className="bg-purple-600 text-white hover:bg-purple-700">Sign Up</Button>
-              </form>
             </div>
           </div>
         </div>
