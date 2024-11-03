@@ -117,7 +117,7 @@ export default function StreamView({
     });
 
     try {
-        const res = await fetch("/api/streams/", {
+        const res = await fetch("https://streamic.vercel.app/api/streams/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
