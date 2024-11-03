@@ -117,6 +117,7 @@ export default function StreamView({
     });
 
     try {
+
         const res = await fetch("/api/streams/", {
             method: "POST",
             headers: {
@@ -129,8 +130,8 @@ export default function StreamView({
         if (!res.ok) {
             throw new Error(`Server error: ${res.status} ${res.statusText}`);
         }
-
         const newStream = await res.json();
+        console.log(newStream);
         setQueue([...queue, newStream]);
     } catch (error) {
         console.error("Error adding video:", error);
