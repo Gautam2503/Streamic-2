@@ -122,7 +122,7 @@ export default function StreamView({
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Content-Length": body.length.toString(), // Adding Content-Length
+                "Content-Length": Buffer.byteLength(body, 'utf-8').toString(), // Adding Content-Length
             },
             body,
         });
