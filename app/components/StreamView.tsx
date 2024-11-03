@@ -12,6 +12,7 @@ import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 import { YT_REGEX } from '../lib/utils'
 //@ts-ignore
 import YouTubePlayer from 'youtube-player';
+import axios from 'axios';
 
 interface Video {
     id: string,
@@ -106,7 +107,10 @@ export default function StreamView({
     };
   }, [currentVideo]);
 
-  // Handle video submission
+
+
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -120,7 +124,7 @@ export default function StreamView({
 
     try {
         console.log(Buffer.byteLength(body, 'utf-8').toString());
-        const res = await fetch("/api/streams/add", {
+        const res = await fetch("/api/streams", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -144,6 +148,37 @@ export default function StreamView({
         setInputLink('');
     }
 };
+
+
+
+  // Handle video submission
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     // Prepare the body
+//     const body = {
+//         creatorId,
+//         url: inputLink,
+//     };
+
+//     try {
+//         const res = await axios.post("/api/streams", body, {
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//         });
+
+//         const newStream = res.data;
+//         console.log(newStream);
+//         setQueue([...queue, newStream]);
+//     } catch (error) {
+//         console.error("Error adding video:", error);
+//     } finally {
+//         setLoading(false);
+//         setInputLink('');
+//     }
+// };
 
   // Handle upvote/downvote
   const handleVote = (id: string, isUpvote: boolean) => {
