@@ -109,26 +109,36 @@ export default function StreamView({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Prepare the body
+    const body = JSON.stringify({
+        creatorId,
+        url: inputLink,
+    });
+
     try {
-      const res = await fetch("/api/streams/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          creatorId,
-          url: inputLink,
-        }),
-      });
-      const newStream = await res.json();
-      setQueue([...queue, newStream]);
+        const res = await fetch("/api/streams/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Content-Length": body.length.toString(), // Adding Content-Length
+            },
+            body,
+        });
+
+        if (!res.ok) {
+            throw new Error(`Server error: ${res.status} ${res.statusText}`);
+        }
+
+        const newStream = await res.json();
+        setQueue([...queue, newStream]);
     } catch (error) {
-      console.error("Error adding video:", error);
+        console.error("Error adding video:", error);
     } finally {
-      setLoading(false);
-      setInputLink('');
+        setLoading(false);
+        setInputLink('');
     }
-  };
+};
 
   // Handle upvote/downvote
   const handleVote = (id: string, isUpvote: boolean) => {
