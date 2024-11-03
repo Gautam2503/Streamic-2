@@ -123,7 +123,6 @@ export default function StreamView({
     });
 
     try {
-        console.log(Buffer.byteLength(body, 'utf-8').toString());
         const res = await fetch("/api/streams", {
             method: "POST",
             headers: {
@@ -133,7 +132,7 @@ export default function StreamView({
             },
             body,
         });
-
+        console.log(Buffer.byteLength(body, 'utf-8').toString());
         if (!res.ok) {
             throw new Error(`Server error: ${res.status} ${res.statusText}`);
         }
