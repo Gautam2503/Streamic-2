@@ -162,25 +162,25 @@ const handleSubmit = async (e: React.FormEvent) => {
         bogus: bog
     };
 
-    try {
+    //try {
         const res = await axios.post("/api/streams", body, {
             headers: { "Content-Type": "application/json" }
         });
 
         console.log(res.data);
         setQueue([...queue, res.data]);
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error("Error adding video:", error.message);
-            console.error("Response data:", error.response?.data);
-            console.error("Status:", error.response?.status);
-        } else {
-            console.error("Unexpected error:", error);
-        }
-    } finally {
+    // } catch (error) {
+    //     if (axios.isAxiosError(error)) {
+    //         console.error("Error adding video:", error.message);
+    //         console.error("Response data:", error.response?.data);
+    //         console.error("Status:", error.response?.status);
+    //     } else {
+    //         console.error("Unexpected error:", error);
+    //     }
+    // } finally {
         setLoading(false);
         setInputLink('');
-    }
+    //}
 };
 
   // Handle upvote/downvote
