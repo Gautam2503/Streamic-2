@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({
                 message: "Already at limit"
             }, {
-                status: 411
+                status: 429
             })
         }
 
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({
             message: "Error while adding a stream"
         }, {
-            status: 411
+            status: 500
         })
     }
 
