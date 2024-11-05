@@ -12,6 +12,7 @@ import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 import { YT_REGEX } from '../lib/utils'
 //@ts-ignore
 import YouTubePlayer from 'youtube-player';
+import axios from 'axios';
 
 interface Video {
     id: string,
@@ -113,28 +114,19 @@ export default function StreamView({
     e.preventDefault();
     setLoading(true);
 
-    // Prepare the body
-    const body = JSON.stringify({
+    const body = {
         creatorId,
         url: inputLink,
-    });
+    };
 
     try {
-        const len = 2024;
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/streams`, {
-            method: "POST",
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/streams`, body, {
             headers: {
                 "Content-Type": "application/json",
             },
-            body,
         });
-        console.log(len.toString());
-        if (!res.ok) {
-            throw new Error(`Server error: ${res.status} ${res.statusText}`);
-        }
 
-        const newStream = await res.json();
-        console.log(newStream);
+        const newStream = res.data;
         setQueue([...queue, newStream]);
     } catch (error) {
         console.error("Error adding video:", error);
