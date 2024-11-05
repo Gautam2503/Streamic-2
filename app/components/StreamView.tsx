@@ -121,7 +121,7 @@ export default function StreamView({
 
     try {
         const len = 2024;
-        const res = await fetch("/api/streams", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/streams`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
