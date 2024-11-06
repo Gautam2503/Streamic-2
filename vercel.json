@@ -4,8 +4,6 @@
         "DATABASE_URL": "@database_url"
       }
     },
-    "scripts": {
-      "build": "npx prisma generate && pnpm run build"
-    }
+    "buildcommand": "npx prisma generate && pnpm run build"
   }
   
